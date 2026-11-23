@@ -1,1 +1,1866 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16201c">
+<title>Pemilihan Unit Beruniform — IPG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN SYSTEM — "Daftar Unit"
+   Satu palet, satu skala tipografi, satu set jarak.
+   ============================================================ */
+:root{
+  --paper:#f6f4ee;
+  --paper-2:#efece3;
+  --card:#fffefb;
+  --ink:#16201c;
+  --ink-2:#3c4a43;
+  --ink-3:#6d7a72;
+  --ink-4:#9aa69e;
+  --line:#dcd8cc;
+  --line-2:#eae6dc;
+  --green:#1f4d3a;
+  --green-2:#2c6a50;
+  --green-soft:#e6efe9;
+  --gold:#a97a2f;
+  --gold-soft:#f7efdf;
+  --red:#9c2f28;
+  --red-soft:#fbeae8;
+  --amber:#8a6414;
+  --amber-soft:#fbf2dc;
+  --radius:14px;
+  --radius-sm:9px;
+  --shadow:0 1px 2px rgba(22,32,28,.05), 0 8px 24px -12px rgba(22,32,28,.18);
+  --shadow-lg:0 2px 6px rgba(22,32,28,.06), 0 24px 60px -24px rgba(22,32,28,.3);
+  --font-ui:'Inter',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-display:'Fraunces',ui-serif,Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font-ui);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:15px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(31,77,58,.05), transparent 45%),
+    radial-gradient(circle at 88% 92%, rgba(169,122,47,.055), transparent 42%);
+}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+a{color:var(--green);text-underline-offset:3px}
+.hidden{display:none !important}
+::selection{background:var(--green-soft)}
+
+/* ---------- tipografi ---------- */
+.display{font-family:var(--font-display);font-weight:500;letter-spacing:-.015em;line-height:1.12}
+.eyebrow{
+  font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.muted{color:var(--ink-3)}
+.tiny{font-size:11.5px;line-height:1.45}
+.mono{font-variant-numeric:tabular-nums;font-feature-settings:'tnum';letter-spacing:.01em}
+
+/* ---------- susun atur ---------- */
+.wrap{width:100%;max-width:1080px;margin:0 auto;padding:0 16px}
+@media(min-width:640px){.wrap{padding:0 24px}}
+.stack{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;align-items:center;gap:10px}
+.row-between{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.grow{flex:1;min-width:0}
+
+/* ---------- kad ---------- */
+.card{
+  background:var(--card);
+  border:1px solid var(--line-2);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.card-pad{padding:16px}
+@media(min-width:640px){.card-pad{padding:20px}}
+
+/* ---------- butang ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;padding:0 18px;border-radius:10px;
+  font-size:14px;font-weight:600;letter-spacing:-.005em;
+  transition:background .16s ease,border-color .16s ease,transform .12s ease,box-shadow .16s ease;
+  white-space:nowrap;
+}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-primary{background:var(--green);color:#fff;box-shadow:0 1px 2px rgba(22,32,28,.15)}
+.btn-primary:hover:not(:disabled){background:var(--green-2)}
+.btn-ghost{background:var(--card);border:1px solid var(--line);color:var(--ink-2)}
+.btn-ghost:hover:not(:disabled){background:var(--paper-2)}
+.btn-danger{background:var(--red-soft);border:1px solid #eccfca;color:var(--red)}
+.btn-danger:hover:not(:disabled){background:#f8dedb}
+.btn-sm{min-height:36px;padding:0 12px;font-size:12.5px;border-radius:8px}
+.btn-block{width:100%}
+
+/* ---------- medan ---------- */
+.field{display:block}
+.field > span{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.input,select.input{
+  width:100%;min-height:46px;padding:0 13px;
+  background:var(--paper-2);border:1px solid var(--line);border-radius:10px;
+  font-size:16px; /* elak zoom automatik iOS */
+  transition:border-color .15s ease,background .15s ease,box-shadow .15s ease;
+}
+@media(min-width:640px){.input,select.input{font-size:14px;min-height:44px}}
+.input:focus,select.input:focus{
+  outline:none;border-color:var(--green);background:#fff;
+  box-shadow:0 0 0 3px rgba(31,77,58,.1);
+}
+.input::placeholder{color:var(--ink-4)}
+select.input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236d7a72' d='M6 8 0 1.4 1.4 0 6 4.6 10.6 0 12 1.4z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px}
+
+/* ---------- label status ---------- */
+.pill{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 9px;border-radius:999px;
+  font-size:11px;font-weight:700;letter-spacing:.02em;
+  border:1px solid transparent;white-space:nowrap;
+}
+.pill-ok{background:var(--green-soft);color:var(--green);border-color:#cfe2d6}
+.pill-warn{background:var(--amber-soft);color:var(--amber);border-color:#eddfb9}
+.pill-full{background:var(--red-soft);color:var(--red);border-color:#eccfca}
+.pill-mute{background:var(--paper-2);color:var(--ink-3);border-color:var(--line)}
+
+/* ============================================================
+   LOG MASUK
+   ============================================================ */
+#skrinLogMasuk{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px 16px}
+.login-shell{width:100%;max-width:420px}
+.brand{margin-bottom:22px}
+.brand-mark{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:12px;margin-bottom:14px;
+  background:var(--green);color:#fff;font-family:var(--font-display);font-size:20px;font-weight:600;
+  box-shadow:var(--shadow);
+}
+.brand h1{font-size:26px;margin-bottom:5px}
+.brand p{font-size:13px;color:var(--ink-3);max-width:34ch}
+
+.segmen{
+  display:grid;grid-template-columns:1fr 1fr;gap:4px;
+  background:var(--paper-2);border:1px solid var(--line);border-radius:11px;padding:4px;margin-bottom:16px;
+}
+.segmen button{
+  min-height:40px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink-3);
+  transition:background .15s ease,color .15s ease,box-shadow .15s ease;
+}
+.segmen button[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(22,32,28,.08)}
+
+/* ============================================================
+   APP SHELL
+   ============================================================ */
+.topbar{
+  position:sticky;top:0;z-index:40;
+  background:rgba(246,244,238,.92);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{display:flex;align-items:center;gap:12px;padding:11px 0}
+.topbar .who{font-size:13px;font-weight:600;line-height:1.25}
+.topbar .who span{display:block;font-size:11px;font-weight:500;color:var(--ink-3);letter-spacing:.02em}
+
+.tabs{
+  display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;
+  border-top:1px solid var(--line-2);margin-top:2px;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{
+  position:relative;min-height:42px;padding:0 13px;
+  font-size:12.5px;font-weight:600;color:var(--ink-3);white-space:nowrap;
+  transition:color .15s ease;
+}
+.tabs button[aria-selected="true"]{color:var(--green)}
+.tabs button[aria-selected="true"]::after{
+  content:'';position:absolute;left:9px;right:9px;bottom:0;height:2px;
+  background:var(--green);border-radius:2px 2px 0 0;
+}
+.tabs .badge{
+  display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;
+  background:var(--paper-2);color:var(--ink-3);font-size:10px;font-weight:700;
+}
+.tabs button[aria-selected="true"] .badge{background:var(--green-soft);color:var(--green)}
+
+main{padding:20px 0 56px}
+.section-head{margin-bottom:16px}
+.section-head h2{font-size:19px;margin-bottom:3px}
+.section-head p{font-size:12.5px;color:var(--ink-3)}
+
+/* ============================================================
+   UNIT CARD (pelajar)
+   ============================================================ */
+.unit-grid{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:700px){.unit-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.unit-grid{grid-template-columns:1fr 1fr 1fr}}
+
+.unit{
+  position:relative;overflow:hidden;
+  background:var(--card);border:1px solid var(--line-2);border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.unit:hover{box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+.unit.is-mine{border-color:var(--green);box-shadow:0 0 0 1px var(--green), var(--shadow-lg)}
+.unit.is-full{opacity:.72}
+.unit.is-disabled{opacity:.55}
+.unit-rail{position:absolute;left:0;top:0;bottom:0;width:4px}
+.unit-body{padding:15px 15px 14px 19px}
+.unit-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:11px}
+.unit-code{
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-4);margin-bottom:2px;
+}
+.unit-name{font-family:var(--font-display);font-size:16.5px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+.unit-mark{
+  flex:none;width:34px;height:34px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;letter-spacing:.02em;
+}
+
+.bar{height:6px;border-radius:999px;background:var(--paper-2);overflow:hidden;margin:9px 0 7px}
+.bar > i{display:block;height:100%;border-radius:999px;transition:width .4s cubic-bezier(.2,.8,.2,1)}
+.unit-meta{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.unit-meta .n{font-size:12.5px;font-weight:600}
+.unit-meta .n b{font-variant-numeric:tabular-nums}
+.unit-foot{margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);display:flex;align-items:center;justify-content:space-between;gap:8px}
+.gender-split{display:flex;gap:12px;font-size:11.5px;color:var(--ink-3)}
+.gender-split span{display:inline-flex;align-items:center;gap:4px}
+.gender-split b{color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* ============================================================
+   ADMIN — stat, jadual, kuota
+   ============================================================ */
+.stat-grid{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:640px){.stat-grid{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--card);border:1px solid var(--line-2);border-radius:12px;padding:13px 14px;box-shadow:var(--shadow)}
+.stat .k{font-size:10px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-4);margin-bottom:4px}
+.stat .v{font-family:var(--font-display);font-size:23px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.stat .s{font-size:11px;color:var(--ink-3);margin-top:3px}
+
+.table-wrap{overflow:auto;border:1px solid var(--line-2);border-radius:12px;background:var(--card);-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:560px}
+thead th{
+  position:sticky;top:0;z-index:2;background:var(--paper-2);
+  text-align:left;padding:10px 12px;font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+  border-bottom:1px solid var(--line);white-space:nowrap;
+}
+tbody td{padding:10px 12px;border-bottom:1px solid var(--line-2);vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--paper)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+
+.kuota-row{
+  display:grid;grid-template-columns:1fr;gap:10px;
+  padding:13px 0;border-bottom:1px solid var(--line-2);
+}
+.kuota-row:last-child{border-bottom:0}
+@media(min-width:640px){.kuota-row{grid-template-columns:minmax(0,1fr) 96px 96px 84px;align-items:center;gap:12px}}
+.kuota-name{display:flex;align-items:center;gap:9px;min-width:0}
+.kuota-dot{flex:none;width:9px;height:9px;border-radius:3px}
+.kuota-name .t{font-size:13.5px;font-weight:600;line-height:1.25}
+.kuota-name .u{font-size:10.5px;color:var(--ink-4);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+
+/* kotak muat naik */
+.drop{
+  border:1.5px dashed var(--line);border-radius:12px;background:var(--paper-2);
+  padding:18px 16px;text-align:center;transition:border-color .15s ease,background .15s ease;
+}
+.drop.is-over{border-color:var(--green);background:var(--green-soft)}
+
+/* ---------- toast ---------- */
+#toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom));z-index:200;display:flex;flex-direction:column;gap:8px;width:calc(100% - 32px);max-width:420px;pointer-events:none}
+.toast{
+  display:flex;align-items:flex-start;gap:9px;
+  padding:12px 14px;border-radius:11px;font-size:13px;font-weight:500;line-height:1.4;
+  box-shadow:var(--shadow-lg);pointer-events:auto;
+  animation:toastIn .22s cubic-bezier(.2,.9,.2,1);
+}
+@keyframes toastIn{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.toast-ok{background:var(--green);color:#fff}
+.toast-err{background:var(--red);color:#fff}
+.toast-warn{background:#7a5810;color:#fff}
+.toast i{flex:none;width:16px;height:16px;margin-top:1px;opacity:.9}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:150;display:flex;align-items:flex-end;justify-content:center;padding:0}
+@media(min-width:640px){.modal{align-items:center;padding:20px}}
+.modal-veil{position:absolute;inset:0;background:rgba(22,32,28,.44);backdrop-filter:blur(3px);animation:veilIn .18s ease}
+@keyframes veilIn{from{opacity:0}to{opacity:1}}
+.modal-card{
+  position:relative;width:100%;max-width:440px;background:var(--card);
+  border-radius:16px 16px 0 0;box-shadow:var(--shadow-lg);padding:20px;
+  padding-bottom:calc(20px + env(safe-area-inset-bottom));
+  animation:sheetIn .26s cubic-bezier(.2,.9,.2,1);
+}
+@media(min-width:640px){.modal-card{border-radius:16px;padding-bottom:20px}}
+@keyframes sheetIn{from{transform:translateY(14px);opacity:.6}to{transform:none;opacity:1}}
+
+/* ---------- pelbagai ---------- */
+.empty{padding:34px 20px;text-align:center}
+.empty p{font-size:13px;color:var(--ink-3);max-width:36ch;margin:0 auto}
+.skel{background:linear-gradient(90deg,var(--paper-2) 25%,#f4f1e9 50%,var(--paper-2) 75%);background-size:200% 100%;animation:sh 1.3s infinite;border-radius:8px}
+@keyframes sh{from{background-position:200% 0}to{background-position:-200% 0}}
+.divider{height:1px;background:var(--line-2);margin:14px 0}
+.spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+
+/* ---------- cetakan senarai unit ---------- */
+#cetakUnit{display:none}
+@media print{
+  @page{size:A4 portrait;margin:10mm}
+  body>*:not(#cetakUnit){display:none !important}
+  body{background:#fff !important;overflow:visible !important}
+  #cetakUnit{display:block !important}
+  #cetakUnit table{page-break-inside:auto}
+  #cetakUnit tr{page-break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== LOG MASUK ==================== -->
+<div id="skrinLogMasuk">
+  <div class="login-shell">
+    <div class="brand">
+      <div class="brand-mark">U</div>
+      <h1 class="display">Pemilihan Unit<br>Beruniform</h1>
+      <p>Institut Pendidikan Guru — daftar unit beruniform anda untuk sesi ini.</p>
+    </div>
+
+    <div class="card card-pad">
+      <div class="segmen" role="tablist">
+        <button role="tab" aria-selected="true" data-login="pelajar">Pelajar</button>
+        <button role="tab" aria-selected="false" data-login="admin">Penyelaras</button>
+      </div>
+
+      <form id="borangPelajar" class="stack" autocomplete="on" novalidate>
+        <label class="field">
+          <span>Nombor kad pengenalan</span>
+          <input class="input" id="logKP" inputmode="numeric" autocomplete="username"
+                 placeholder="cth. 060706142030" spellcheck="false">
+        </label>
+        <p class="tiny muted">Guna No. KP seperti dalam senarai pelajar (tanpa sengkang).</p>
+        <button class="btn btn-primary btn-block" type="submit" id="btnPelajar">Masuk</button>
+      </form>
+
+      <form id="borangAdmin" class="stack hidden" autocomplete="on" novalidate>
+        <label class="field">
+          <span>Emel penyelaras</span>
+          <input class="input" id="logEmel" type="email" autocomplete="username" placeholder="admin@ipg.edu.my">
+        </label>
+        <label class="field">
+          <span>Kata laluan</span>
+          <input class="input" id="logPass" type="password" autocomplete="current-password" placeholder="••••••••">
+        </label>
+        <button class="btn btn-primary btn-block" type="submit" id="btnAdmin">Log masuk</button>
+      </form>
+
+      <div id="ralatLogMasuk" class="hidden" style="margin-top:12px;padding:10px 12px;border-radius:9px;background:var(--red-soft);border:1px solid #eccfca;color:var(--red);font-size:12.5px;font-weight:500"></div>
+    </div>
+
+    <p class="tiny muted" style="text-align:center;margin-top:18px">Unit Kokurikulum · IPG Kampus Darulaman</p>
+  </div>
+</div>
+
+<!-- ==================== APP ==================== -->
+<div id="app" class="hidden">
+  <header class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <div class="grow">
+          <div class="who" id="namaPengguna">—<span id="perananPengguna">—</span></div>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="btnKeluar">Keluar</button>
+      </div>
+      <nav class="tabs" id="navTabs" role="tablist"></nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap" id="kandungan"></div>
+  </main>
+</div>
+
+<div id="toasts"></div>
+<div id="modalAkar"></div>
+
+<script>
+/* ============================================================
+   KONFIGURASI
+   ============================================================ */
+// Tampal URL /exec Apps Script anda di sini selepas deploy.
+const urlAPI = 'https://script.google.com/macros/s/AKfycbx4aqOUcHtOGAVbA3h9teJxP78qlUc_B2OepTDLGvrZ62EHW3FuNrNEl2piWIL3OiJu4A/exec';
+const MOD_DEMO = urlAPI.indexOf('GANTI_URL_EXEC_ANDA') !== -1 || /[?&]demo=1/.test(location.search);
+const VERSI = '3.0.0';
+
+/* ============================================================
+   KEADAAN
+   ============================================================ */
+let sesi = null;          // {peranan, nama, email|noKP, token}
+let data = null;          // muatan terakhir dari backend
+let tabAktif = '';
+let sedangMuat = false;
+
+const SIMPAN_SESI = 'ub_sesi_v2';
+const SIMPAN_DEMO = 'ub_demo_v2';
+
+/* ============================================================
+   UTILITI
+   ============================================================ */
+const $ = (id) => document.getElementById(id);
+const esc = (v) => String(v === null || v === undefined ? '' : v)
+  .replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function toast(mesej, jenis) {
+  const wadah = $('toasts');
+  const el = document.createElement('div');
+  el.className = 'toast ' + (jenis === 'error' ? 'toast-err' : jenis === 'warn' ? 'toast-warn' : 'toast-ok');
+  el.innerHTML = '<i>' + (jenis === 'error' || jenis === 'warn'
+    ? '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6.4"/><path d="M8 5v3.6M8 10.8v.2"/></svg>'
+    : '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 8.4l3.2 3.2L13 4.8"/></svg>') +
+    '</i><span>' + esc(mesej) + '</span>';
+  wadah.appendChild(el);
+  setTimeout(() => {
+    el.style.transition = 'opacity .2s ease, transform .2s ease';
+    el.style.opacity = '0'; el.style.transform = 'translateY(8px)';
+    setTimeout(() => el.remove(), 220);
+  }, 4200);
+}
+
+function modal({ tajuk, isi, butangUtama, butangBatal, jenis }) {
+  return new Promise(resolve => {
+    const akar = $('modalAkar');
+    akar.innerHTML =
+      '<div class="modal"><div class="modal-veil" data-batal></div>' +
+      '<div class="modal-card">' +
+        '<h3 class="display" style="font-size:19px;margin-bottom:6px">' + esc(tajuk) + '</h3>' +
+        '<div style="font-size:13.5px;color:var(--ink-2);line-height:1.55">' + isi + '</div>' +
+        '<div class="row" style="margin-top:18px;gap:9px">' +
+          (butangBatal === null ? '' : '<button class="btn btn-ghost grow" data-batal>' + esc(butangBatal || 'Batal') + '</button>') +
+          '<button class="btn ' + (jenis === 'bahaya' ? 'btn-danger' : 'btn-primary') + ' grow" data-ok>' + esc(butangUtama || 'Teruskan') + '</button>' +
+        '</div>' +
+      '</div></div>';
+    const tutup = (hasil) => { akar.innerHTML = ''; resolve(hasil); };
+    akar.querySelectorAll('[data-batal]').forEach(b => b.onclick = () => tutup(false));
+    akar.querySelector('[data-ok]').onclick = () => tutup(true);
+  });
+}
+
+function modalPrompt({ tajuk, isi, label, nilaiLalai, butangUtama }) {
+  return new Promise(resolve => {
+    const akar = $('modalAkar');
+    akar.innerHTML =
+      '<div class="modal"><div class="modal-veil" data-batal></div>' +
+      '<div class="modal-card">' +
+        '<h3 class="display" style="font-size:19px;margin-bottom:6px">' + esc(tajuk) + '</h3>' +
+        '<div style="font-size:13.5px;color:var(--ink-2);margin-bottom:14px;line-height:1.55">' + isi + '</div>' +
+        '<label class="field"><span>' + esc(label) + '</span>' +
+        '<input class="input" id="mpNilai" value="' + esc(nilaiLalai || '') + '" autocomplete="off"></label>' +
+        '<div class="row" style="margin-top:16px;gap:9px">' +
+          '<button class="btn btn-ghost grow" data-batal>Batal</button>' +
+          '<button class="btn btn-primary grow" data-ok>' + esc(butangUtama || 'Sahkan') + '</button>' +
+        '</div>' +
+      '</div></div>';
+    const input = $('mpNilai');
+    setTimeout(() => input.focus(), 60);
+    const tutup = (v) => { akar.innerHTML = ''; resolve(v); };
+    akar.querySelectorAll('[data-batal]').forEach(b => b.onclick = () => tutup(null));
+    akar.querySelector('[data-ok]').onclick = () => tutup(input.value);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') tutup(input.value); });
+  });
+}
+
+/* ============================================================
+   API
+   ============================================================ */
+function panggil(muatan) {
+  if (MOD_DEMO) return Promise.resolve(demoAPI(muatan));
+  return fetch(urlAPI, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(Object.assign({}, muatan, { token: sesi ? sesi.token : '' }))
+  })
+  .then(r => r.text())
+  .then(txt => {
+    try { return JSON.parse(txt); }
+    catch (e) { throw new Error('Respons pelayan tidak sah. Semak URL /exec dan deployment.'); }
+  });
+}
+
+/* ============================================================
+   MOD DEMO — data dalam pelayar sahaja
+   ============================================================ */
+function demoMuat() {
+  try {
+    const s = localStorage.getItem(SIMPAN_DEMO);
+    if (s) return JSON.parse(s);
+  } catch (e) {}
+  const unit = [
+    { kod:'PENGAKAP', nama:'Pengakap', singkatan:'PGA', warna:'#2f6b4f', kuotaLelaki:25, kuotaPerempuan:25, susunan:1, aktif:true },
+    { kod:'BSMM', nama:'Bulan Sabit Merah Malaysia', singkatan:'BSMM', warna:'#a8332a', kuotaLelaki:25, kuotaPerempuan:25, susunan:2, aktif:true },
+    { kod:'PANDU', nama:'Pandu Puteri', singkatan:'PP', warna:'#8c5a1f', kuotaLelaki:0, kuotaPerempuan:30, susunan:3, aktif:true },
+    { kod:'PUTERI', nama:'Puteri Islam', singkatan:'PI', warna:'#5b4b8a', kuotaLelaki:0, kuotaPerempuan:30, susunan:4, aktif:true },
+    { kod:'SISPA', nama:'Kor Sispa', singkatan:'KS', warna:'#1f5673', kuotaLelaki:25, kuotaPerempuan:25, susunan:5, aktif:true },
+    { kod:'KRS', nama:'Kadet Remaja Sekolah', singkatan:'KRS', warna:'#3f6b23', kuotaLelaki:25, kuotaPerempuan:25, susunan:6, aktif:true }
+  ];
+  const namaL = ['Ahmad Zulkifli','Muhammad Haziq','Rajesh Kumar','Tan Wei Ming','Amirul Amin','Faizal Harun','Syafiq Rosli','Danial Iskandar','Izzat Kamarudin','Hafiz Zainal'];
+  const namaP = ['Nur Aisyah','Tan Wei Ling','Siti Nurhaliza','Alieya Nuruz','Nur Amira Aina','Farah Nadhirah','Anis Sofia','Hani Syafiqah','Nurin Izzati','Alya Batrisyia'];
+  const pelajar = [];
+  for (let i = 1; i <= 24; i++) {
+    const L = i % 2 === 1;
+    pelajar.push({
+      noKP: '06070614' + String(2000 + i),
+      nama: (L ? namaL : namaP)[Math.floor((i - 1) / 2) % 10] + ' BINTI/BIN ' + (i % 3 === 0 ? 'OMAR' : 'ABU'),
+      angkaGiliran: 'MPU' + String(i).padStart(4, '0'),
+      kelas: 'BAM' + (1 + (i % 3)),
+      kumpulan: i % 2 ? 'A' : 'B',
+      ambilan: '2026',
+      jantina: L ? 'L' : 'P',
+      aktif: true
+    });
+  }
+  const db = { unit, pelajar, pemilihan: [], admin: { email:'admin@ipg.edu.my', nama:'Penyelaras', password:'admin123' } };
+  demoSimpan(db);
+  return db;
+}
+function demoSimpan(db) {
+  try { localStorage.setItem(SIMPAN_DEMO, JSON.stringify(db)); } catch (e) {}
+}
+function demoKiraUnit(db, jantinaPemohon) {
+  return db.unit.map(u => {
+    const sL = db.pemilihan.filter(p => p.kodUnit === u.kod && p.jantina === 'L').length;
+    const sP = db.pemilihan.filter(p => p.kodUnit === u.kod && p.jantina === 'P').length;
+    const o = Object.assign({}, u, {
+      semasaLelaki: sL, semasaPerempuan: sP,
+      bakiLelaki: Math.max(0, u.kuotaLelaki - sL), bakiPerempuan: Math.max(0, u.kuotaPerempuan - sP),
+      jumlah: sL + sP, kapasiti: u.kuotaLelaki + u.kuotaPerempuan
+    });
+    if (jantinaPemohon === 'L') { o.bakiUntukSaya = o.bakiLelaki; o.kuotaUntukSaya = u.kuotaLelaki; }
+    if (jantinaPemohon === 'P') { o.bakiUntukSaya = o.bakiPerempuan; o.kuotaUntukSaya = u.kuotaPerempuan; }
+    return o;
+  }).sort((a, b) => a.susunan - b.susunan);
+}
+
+function demoAPI(p) {
+  const db = demoMuat();
+  const aksi = String(p.action || '');
+
+  if (aksi === 'loginAdmin') {
+    if (String(p.email || '').toLowerCase() === db.admin.email && String(p.password || '') === db.admin.password) {
+      return { status:'ok', token:'demo-admin', pengguna:{ peranan:'admin', email: db.admin.email, nama: db.admin.nama } };
+    }
+    return { status:'ralat', message:'Emel atau kata laluan tidak sah. (Demo: admin@ipg.edu.my / admin123)' };
+  }
+
+  if (aksi === 'loginPelajar') {
+    const kp = String(p.noKP || '').replace(/[^0-9]/g, '');
+    const pl = db.pelajar.find(x => x.noKP.replace(/[^0-9]/g, '') === kp);
+    if (!pl) return { status:'ralat', message:'No. KP tidak dijumpai. (Demo: guna 060706142001 hingga 060706142024)' };
+    return { status:'ok', token:'demo-' + pl.noKP, pengguna:{ peranan:'pelajar', noKP: pl.noKP, nama: pl.nama } };
+  }
+
+  if (aksi === 'getDataAdmin') {
+    const unit = demoKiraUnit(db);
+    const peta = {};
+    db.pemilihan.forEach(p => { peta[p.noKP] = p.kodUnit; });
+    const pelajar = db.pelajar.map(p => Object.assign({}, p, { unitDipilih: peta[p.noKP] || '' }));
+    return {
+      status:'ok', versi: VERSI + ' demo', pengguna: sesi, unit, pelajar,
+      pemilihan: db.pemilihan,
+      kelas: Array.from(new Set(pelajar.map(p => p.kelas))).sort(),
+      ambilan: Array.from(new Set(pelajar.map(p => p.ambilan))).sort(),
+      ringkasan: {
+        jumlahPelajar: pelajar.length,
+        pelajarLelaki: pelajar.filter(p => p.jantina === 'L').length,
+        pelajarPerempuan: pelajar.filter(p => p.jantina === 'P').length,
+        belumDipilih: pelajar.length - db.pemilihan.length,
+        terisi: db.pemilihan.length,
+        kapasiti: unit.reduce((a, u) => a + u.kapasiti, 0),
+        unitAktif: unit.filter(u => u.aktif).length
+      }
+    };
+  }
+
+  if (aksi === 'getDataPelajar') {
+    const pl = db.pelajar.find(x => x.noKP === sesi.noKP);
+    if (!pl) return { status:'ralat', message:'Rekod tidak dijumpai.' };
+    const milik = db.pemilihan.find(x => x.noKP === pl.noKP);
+    return {
+      status:'ok', versi: VERSI + ' demo',
+      pengguna: { peranan:'pelajar', noKP: pl.noKP, nama: pl.nama, kelas: pl.kelas, kumpulan: pl.kumpulan, ambilan: pl.ambilan, jantina: pl.jantina },
+      unit: demoKiraUnit(db, pl.jantina),
+      pilihanSaya: milik ? { kodUnit: milik.kodUnit, masa: milik.masa } : null
+    };
+  }
+
+  if (aksi === 'pilihUnit') {
+    const noKP = sesi.peranan === 'pelajar' ? sesi.noKP : String(p.noKP || '');
+    const pl = db.pelajar.find(x => x.noKP === noKP);
+    if (!pl) return { status:'ralat', message:'Pelajar tidak dijumpai.' };
+    const u = db.unit.find(x => x.kod === p.kodUnit);
+    if (!u) return { status:'ralat', message:'Unit tidak dijumpai.' };
+    const kuota = pl.jantina === 'L' ? u.kuotaLelaki : u.kuotaPerempuan;
+    if (kuota <= 0) return { status:'ralat', message: u.nama + ' tidak menerima pelajar ' + (pl.jantina === 'L' ? 'lelaki' : 'perempuan') + '.' };
+    const sedia = db.pemilihan.find(x => x.noKP === noKP);
+    if (sedia && sedia.kodUnit === p.kodUnit) {
+      db.pemilihan = db.pemilihan.filter(x => x.noKP !== noKP);
+      demoSimpan(db);
+      return { status:'ok', message:'Pilihan dibatalkan — anda tidak lagi dalam ' + u.nama + '.', tindakan:'batal' };
+    }
+    db.pemilihan = db.pemilihan.filter(x => x.noKP !== noKP);
+    const semasa = db.pemilihan.filter(x => x.kodUnit === p.kodUnit && x.jantina === pl.jantina).length;
+    if (semasa >= kuota) {
+      if (sedia) db.pemilihan.push(sedia);
+      demoSimpan(db);
+      return { status:'ralat', message:'Kuota ' + (pl.jantina === 'L' ? 'lelaki' : 'perempuan') + ' untuk ' + u.nama + ' sudah penuh (' + semasa + '/' + kuota + ').' };
+    }
+    db.pemilihan.push({ noKP, nama: pl.nama, kodUnit: p.kodUnit, jantina: pl.jantina, kelas: pl.kelas, ambilan: pl.ambilan, masa: new Date().toISOString(), oleh: sesi.noKP || sesi.email });
+    demoSimpan(db);
+    return { status:'ok', message:'Berjaya didaftarkan ke ' + u.nama + '.', kodUnit: p.kodUnit, baki: kuota - semasa - 1, tindakan:'pilih' };
+  }
+
+  if (aksi === 'batalPilihan') {
+    const noKP = sesi.peranan === 'pelajar' ? sesi.noKP : String(p.noKP || '');
+    const ada = db.pemilihan.some(x => x.noKP === noKP);
+    db.pemilihan = db.pemilihan.filter(x => x.noKP !== noKP);
+    demoSimpan(db);
+    return { status:'ok', message: ada ? 'Pilihan dibatalkan.' : 'Tiada pilihan untuk dibatalkan.' };
+  }
+
+  if (aksi === 'simpanKuota') {
+    (p.unit || []).forEach(u => {
+      const t = db.unit.find(x => x.kod === u.kod);
+      if (!t) return;
+      if (u.kuotaLelaki !== undefined) t.kuotaLelaki = Math.max(0, Number(u.kuotaLelaki) || 0);
+      if (u.kuotaPerempuan !== undefined) t.kuotaPerempuan = Math.max(0, Number(u.kuotaPerempuan) || 0);
+      if (u.aktif !== undefined) t.aktif = !!u.aktif;
+    });
+    demoSimpan(db);
+    return { status:'ok', message:'Kuota disimpan.' };
+  }
+
+  if (aksi === 'importPelajar') {
+    let baharu = 0, dikemas = 0;
+    const ralat = [];
+    (p.baris || []).forEach((b, i) => {
+      const nama = String(b[0] || '').trim();
+      const noKP = String(b[1] || '').replace(/[^0-9A-Za-z]/g, '');
+      if (!nama || !noKP) { ralat.push('Baris ' + (i + 1) + ': ' + (!nama ? 'nama kosong' : 'noKP kosong')); return; }
+      const j = String(b[6] || '').toUpperCase().charAt(0);
+      if (j !== 'L' && j !== 'P') { ralat.push('Baris ' + (i + 1) + ': jantina tidak sah'); return; }
+      const obj = { noKP, nama, angkaGiliran: String(b[2] || '').trim(), kelas: String(b[3] || '').trim(),
+        kumpulan: String(b[4] || '').trim(), ambilan: String(b[5] || '').trim(), jantina: j, aktif: true };
+      const sedia = db.pelajar.findIndex(x => x.noKP === noKP);
+      if (sedia >= 0) { db.pelajar[sedia] = obj; dikemas++; }
+      else { db.pelajar.push(obj); baharu++; }
+    });
+    demoSimpan(db);
+    return { status:'ok', message: baharu + ' pelajar ditambah' + (dikemas ? ', ' + dikemas + ' dikemas kini' : '') + (ralat.length ? '. ' + ralat.length + ' baris dilangkau.' : '.'), baharu, dikemas, ralat: ralat.slice(0, 10) };
+  }
+
+  if (aksi === 'padamPelajar') {
+    const noKP = String(p.noKP || '');
+    db.pelajar = db.pelajar.filter(x => x.noKP !== noKP);
+    db.pemilihan = db.pemilihan.filter(x => x.noKP !== noKP);
+    demoSimpan(db);
+    return { status:'ok', message:'Pelajar dipadam.' };
+  }
+
+  if (aksi === 'padamSemuaPelajar') {
+    if (String(p.sah || '').toUpperCase() !== 'HAPUS SEMUA') return { status:'ralat', message:'Taip HAPUS SEMUA untuk mengesahkan.' };
+    const n = db.pelajar.length;
+    db.pelajar = []; db.pemilihan = [];
+    demoSimpan(db);
+    return { status:'ok', message: n + ' pelajar dipadam.' };
+  }
+
+  return { status:'ralat', message:'Tindakan tidak dikenali (demo): ' + aksi };
+}
+
+/* ============================================================
+   LOG MASUK
+   ============================================================ */
+document.querySelectorAll('[data-login]').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('[data-login]').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+    $('borangPelajar').classList.toggle('hidden', b.dataset.login !== 'pelajar');
+    $('borangAdmin').classList.toggle('hidden', b.dataset.login !== 'admin');
+    $('ralatLogMasuk').classList.add('hidden');
+  };
+});
+
+function tunjukRalatLogMasuk(mesej) {
+  const el = $('ralatLogMasuk');
+  el.textContent = mesej;
+  el.classList.remove('hidden');
+}
+
+$('borangPelajar').onsubmit = (e) => {
+  e.preventDefault();
+  const kp = $('logKP').value.trim();
+  if (!kp) { tunjukRalatLogMasuk('Sila masukkan nombor kad pengenalan.'); return; }
+  const btn = $('btnPelajar');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Mengesahkan';
+  panggil({ action: 'loginPelajar', noKP: kp })
+    .then(r => {
+      if (!r || r.status !== 'ok') { tunjukRalatLogMasuk((r && r.message) || 'Gagal log masuk.'); return; }
+      sesi = { peranan: 'pelajar', noKP: r.pengguna.noKP, nama: r.pengguna.nama, token: r.token };
+      $('ralatLogMasuk').classList.add('hidden');
+      simpanSesi(); bukaApp();
+    })
+    .catch(err => tunjukRalatLogMasuk(err.message))
+    .finally(() => { btn.disabled = false; btn.textContent = 'Masuk'; });
+};
+
+$('borangAdmin').onsubmit = (e) => {
+  e.preventDefault();
+  const emel = $('logEmel').value.trim();
+  const pass = $('logPass').value;
+  if (!emel || !pass) { tunjukRalatLogMasuk('Isi emel dan kata laluan.'); return; }
+  const btn = $('btnAdmin');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Mengesahkan';
+  panggil({ action: 'loginAdmin', email: emel, password: pass })
+    .then(r => {
+      if (!r || r.status !== 'ok') { tunjukRalatLogMasuk((r && r.message) || 'Gagal log masuk.'); return; }
+      sesi = { peranan: 'admin', email: r.pengguna.email, nama: r.pengguna.nama, token: r.token };
+      $('ralatLogMasuk').classList.add('hidden');
+      simpanSesi(); bukaApp();
+    })
+    .catch(err => tunjukRalatLogMasuk(err.message))
+    .finally(() => { btn.disabled = false; btn.textContent = 'Log masuk'; });
+};
+
+function simpanSesi() {
+  try { localStorage.setItem(SIMPAN_SESI, JSON.stringify(sesi)); } catch (e) {}
+}
+function bacaSesi() {
+  try { return JSON.parse(localStorage.getItem(SIMPAN_SESI) || 'null'); } catch (e) { return null; }
+}
+function padamSesi() {
+  try { localStorage.removeItem(SIMPAN_SESI); } catch (e) {}
+}
+
+$('btnKeluar').onclick = async () => {
+  if (!await modal({ tajuk: 'Keluar dari sistem?', isi: 'Anda perlu log masuk semula untuk meneruskan.', butangUtama: 'Keluar', jenis: 'bahaya' })) return;
+  padamSesi();
+  sesi = null; data = null;
+  $('app').classList.add('hidden');
+  $('skrinLogMasuk').classList.remove('hidden');
+  $('logKP').value = ''; $('logPass').value = '';
+  $('ralatLogMasuk').classList.add('hidden');
+};
+
+/* ============================================================
+   SHELL
+   ============================================================ */
+function bukaApp() {
+  $('skrinLogMasuk').classList.add('hidden');
+  $('app').classList.remove('hidden');
+  $('namaPengguna').innerHTML = esc(sesi.nama) + '<span>' +
+    (sesi.peranan === 'admin' ? 'Penyelaras' : 'Pelajar · ' + esc(sesi.noKP)) + '</span>';
+  binaTab();
+  muatData();
+}
+
+function binaTab() {
+  const nav = $('navTabs');
+  const tab = sesi.peranan === 'admin'
+    ? [['ringkasan','Ringkasan'], ['senarai','Senarai Unit'], ['unit','Unit & Kuota'], ['pelajar','Pelajar'], ['import','Import'], ['akaun','Akaun']]
+    : [['pilih','Pilih Unit']];
+  nav.innerHTML = tab.map(([k, label]) =>
+    '<button role="tab" data-tab="' + k + '" aria-selected="false">' + label + '</button>').join('');
+  nav.querySelectorAll('button').forEach(b => {
+    b.onclick = () => tukarTab(b.dataset.tab);
+  });
+  tukarTab(tab[0][0]);
+}
+
+function tukarTab(nama) {
+  if (nama !== 'senarai') unitCetak = '';
+  tabAktif = nama;
+  $('navTabs').querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === nama)));
+  lukis();
+}
+
+function muatData() {
+  if (!sesi) return;
+  sedangMuat = true; lukis();
+  panggil({ action: sesi.peranan === 'admin' ? 'getDataAdmin' : 'getDataPelajar' })
+    .then(r => {
+      if (!r || r.status !== 'ok') {
+        if (r && /sesi tamat/i.test(r.message || '')) { padamSesi(); location.reload(); return; }
+        toast((r && r.message) || 'Gagal memuat data.', 'error');
+        return;
+      }
+      data = r;
+      sedangMuat = false;
+      lukis();
+    })
+    .catch(err => { sedangMuat = false; toast(err.message, 'error'); lukis(); });
+}
+
+function lukis() {
+  if (sedangMuat && !data) { $('kandungan').innerHTML = skeleton(); return; }
+  if (!data) { $('kandungan').innerHTML = skeleton(); return; }
+  if (sesi.peranan === 'pelajar') return lukisPelajar();
+  if (tabAktif === 'senarai' && !dataSenarai) muatSenaraiUnit();
+  const peta = {
+    ringkasan: lukisRingkasan,
+    senarai: lukisSenaraiUnit,
+    unit: lukisUnit,
+    pelajar: lukisPelajarAdmin,
+    import: lukisImport,
+    akaun: lukisAkaun
+  };
+  (peta[tabAktif] || lukisRingkasan)();
+}
+
+function skeleton() {
+  return '<div class="stack">' +
+    '<div class="skel" style="height:74px"></div>' +
+    '<div class="stat-grid">' + Array(4).fill('<div class="skel" style="height:70px"></div>').join('') + '</div>' +
+    '<div class="skel" style="height:220px"></div></div>';
+}
+
+/* ============================================================
+   PAPARAN PELAJAR
+   ============================================================ */
+function lukisPelajar() {
+  const u = data.pengguna;
+  const pilihan = data.pilihanSaya;
+  const unit = (data.unit || []).filter(x => x.aktif);
+  const unitSaya = pilihan ? unit.find(x => x.kod === pilihan.kodUnit) : null;
+
+  let h = '';
+
+  // kad status
+  h += '<div class="card card-pad" style="margin-bottom:16px">';
+  if (unitSaya) {
+    h += '<div class="row-between" style="align-items:flex-start">' +
+      '<div class="grow">' +
+        '<p class="eyebrow" style="margin-bottom:5px">Pendaftaran anda</p>' +
+        '<p class="display" style="font-size:21px">' + esc(unitSaya.nama) + '</p>' +
+        '<p class="tiny muted" style="margin-top:3px">' + esc(u.kelas) + ' · Kumpulan ' + esc(u.kumpulan) + ' · Ambilan ' + esc(u.ambilan) + '</p>' +
+      '</div>' +
+      '<span class="pill pill-ok">Terdaftar</span>' +
+    '</div>' +
+    '<div class="divider"></div>' +
+    '<div class="row-between">' +
+      '<p class="tiny muted">Boleh tukar selagi kuota belum penuh.</p>' +
+      '<button class="btn btn-ghost btn-sm" id="btnBatal">Batalkan</button>' +
+    '</div>';
+  } else {
+    h += '<div class="row-between" style="align-items:flex-start">' +
+      '<div class="grow">' +
+        '<p class="eyebrow" style="margin-bottom:5px">Belum mendaftar</p>' +
+        '<p class="display" style="font-size:21px">Pilih satu unit di bawah</p>' +
+        '<p class="tiny muted" style="margin-top:3px">' + esc(u.kelas) + ' · ' + (u.jantina === 'L' ? 'Lelaki' : 'Perempuan') + ' · Ambilan ' + esc(u.ambilan) + '</p>' +
+      '</div>' +
+      '<span class="pill pill-warn">Belum</span>' +
+    '</div>';
+  }
+  h += '</div>';
+
+  // senarai unit
+  h += '<div class="section-head"><h2 class="display">Enam unit beruniform</h2>' +
+    '<p>Baki tempat dikira untuk jantina anda sahaja.</p></div>';
+
+  h += '<p class="tiny muted" style="margin:-6px 0 12px">Satu pelajar hanya boleh berada dalam satu unit. Memilih unit lain akan memindahkan anda.</p>';
+
+  h += '<div class="unit-grid">';
+  unit.forEach(un => {
+    const kuota = un.kuotaUntukSaya !== undefined ? un.kuotaUntukSaya : (u.jantina === 'L' ? un.kuotaLelaki : un.kuotaPerempuan);
+    const semasa = u.jantina === 'L' ? un.semasaLelaki : un.semasaPerempuan;
+    const baki = Math.max(0, kuota - semasa);
+    const penuh = kuota === 0 || baki === 0;
+    const saya = pilihan && pilihan.kodUnit === un.kod;
+    const peratus = kuota > 0 ? Math.min(100, Math.round(semasa / kuota * 100)) : 0;
+    const warnaBar = penuh ? 'var(--red)' : peratus >= 80 ? 'var(--gold)' : un.warna;
+
+    h += '<article class="unit ' + (saya ? 'is-mine' : '') + ' ' + (penuh && !saya ? 'is-full' : '') + '" data-unit="' + esc(un.kod) + '">' +
+      '<div class="unit-rail" style="background:' + esc(un.warna) + '"></div>' +
+      '<div class="unit-body">' +
+        '<div class="unit-top">' +
+          '<div class="grow">' +
+            '<p class="unit-code">' + esc(un.kod) + '</p>' +
+            '<p class="unit-name">' + esc(un.nama) + '</p>' +
+          '</div>' +
+          '<div class="unit-mark" style="background:' + esc(un.warna) + '18;color:' + esc(un.warna) + '">' + esc(un.singkatan) + '</div>' +
+        '</div>' +
+        '<div class="bar"><i style="width:' + peratus + '%;background:' + warnaBar + '"></i></div>' +
+        '<div class="unit-meta">' +
+          '<span class="n mono">' + semasa + ' / ' + kuota + ' <span class="muted" style="font-weight:500">' + (u.jantina === 'L' ? 'lelaki' : 'perempuan') + '</span></span>' +
+          (kuota === 0
+            ? '<span class="pill pill-mute">Tiada tempat</span>'
+            : penuh
+              ? '<span class="pill pill-full">Penuh</span>'
+              : '<span class="pill pill-ok">Baki ' + baki + '</span>') +
+        '</div>' +
+        '<div class="unit-foot">' +
+          '<div class="gender-split">' +
+            '<span>L <b>' + un.semasaLelaki + '/' + un.kuotaLelaki + '</b></span>' +
+            '<span>P <b>' + un.semasaPerempuan + '/' + un.kuotaPerempuan + '</b></span>' +
+          '</div>' +
+          (saya
+            ? '<span class="pill pill-ok">Pilihan anda</span>'
+            : '<button class="btn btn-sm ' + (penuh ? 'btn-ghost' : 'btn-primary') + '" data-pilih="' + esc(un.kod) + '"' + (penuh ? ' disabled' : '') + '>' +
+              (penuh ? 'Penuh' : 'Pilih') + '</button>') +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  });
+  h += '</div>';
+
+  $('kandungan').innerHTML = h;
+
+  $('kandungan').querySelectorAll('[data-pilih]').forEach(b => {
+    b.onclick = () => pilihUnit(b.dataset.pilih);
+  });
+  const batal = $('btnBatal');
+  if (batal) batal.onclick = () => batalPilihan();
+}
+
+async function pilihUnit(kod) {
+  const un = (data.unit || []).find(x => x.kod === kod);
+  if (!un) return;
+  const ada = data.pilihanSaya;
+  const ok = await modal({
+    tajuk: 'Daftar ke ' + un.nama + '?',
+    isi: ada
+      ? 'Anda akan dipindahkan dari unit semasa. Pilihan boleh ditukar semula selagi kuota belum penuh.'
+      : 'Pendaftaran akan direkodkan atas nama anda. Anda masih boleh menukar unit kemudian.',
+    butangUtama: 'Daftar'
+  });
+  if (!ok) return;
+  // kunci semua butang pilih supaya tiada pendaftaran berganda semasa menunggu
+  document.querySelectorAll('[data-pilih]').forEach(b => { b.disabled = true; });
+  const btn = document.querySelector('[data-pilih="' + kod + '"]');
+  if (btn) btn.innerHTML = '<span class="spin"></span>';
+
+  // Apps Script boleh ambil 3–5 saat. Beri maklum balas segera supaya pelajar
+  // tidak menyangka butang tidak berfungsi dan menekan berulang kali.
+  const kad = document.querySelector('[data-unit="' + kod + '"]');
+  if (kad) {
+    const lama = kad.querySelector('.unit-foot .pill');
+    if (lama) { lama.className = 'pill pill-warn'; lama.textContent = 'Mendaftar…'; }
+    const lamaBtn = kad.querySelector('.unit-foot button');
+    if (lamaBtn) lamaBtn.innerHTML = '<span class="spin" style="border-color:rgba(0,0,0,.15);border-top-color:var(--green)"></span>';
+  }
+  try {
+    const r = await panggil({ action: 'pilihUnit', kodUnit: kod });
+    if (!r || r.status !== 'ok') { toast((r && r.message) || 'Gagal mendaftar.', 'error'); muatData(); return; }
+    toast(r.message, 'ok');
+
+    // Kemas kini segera supaya kad bertukar tanpa menunggu permintaan seterusnya
+    // (Apps Script boleh ambil 3–5 saat; tanpa ini pelajar akan klik berulang).
+    const sebelum = data.pilihanSaya ? data.pilihanSaya.kodUnit : null;
+    const jantina = data.pengguna.jantina;
+    if (r.tindakan === 'batal') {
+      data.pilihanSaya = null;
+    } else {
+      data.pilihanSaya = { kodUnit: kod, masa: new Date().toISOString() };
+    }
+    (data.unit || []).forEach(u => {
+      const medanS = jantina === 'L' ? 'semasaLelaki' : 'semasaPerempuan';
+      const medanB = jantina === 'L' ? 'bakiLelaki' : 'bakiPerempuan';
+      if (sebelum === u.kod && r.tindakan !== 'batal') { u[medanS] = Math.max(0, u[medanS] - 1); u[medanB] = u[medanB] + 1; }
+      if (r.tindakan === 'batal' && sebelum === u.kod) { u[medanS] = Math.max(0, u[medanS] - 1); u[medanB] = u[medanB] + 1; }
+      if (r.tindakan !== 'batal' && u.kod === kod) { u[medanS] = u[medanS] + 1; u[medanB] = Math.max(0, u[medanB] - 1); }
+      if (jantina === 'L') { u.bakiUntukSaya = u.bakiLelaki; } else { u.bakiUntukSaya = u.bakiPerempuan; }
+      u.jumlah = u.semasaLelaki + u.semasaPerempuan;
+    });
+    lukis();
+    muatData(); // sahkan dengan pelayan
+    dataSenarai = null;
+  } catch (e) {
+    toast(e.message, 'error'); muatData();
+  }
+}
+
+async function batalPilihan() {
+  if (!await modal({ tajuk: 'Batalkan pendaftaran?', isi: 'Tempat anda akan dilepaskan untuk pelajar lain.', butangUtama: 'Batalkan', jenis: 'bahaya' })) return;
+  const r = await panggil({ action: 'batalPilihan' });
+  toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+  if (r && r.status === 'ok') {
+    const jantina = data.pengguna.jantina;
+    const kodLama = data.pilihanSaya ? data.pilihanSaya.kodUnit : null;
+    data.pilihanSaya = null;
+    (data.unit || []).forEach(u => {
+      if (u.kod === kodLama) {
+        const medanS = jantina === 'L' ? 'semasaLelaki' : 'semasaPerempuan';
+        const medanB = jantina === 'L' ? 'bakiLelaki' : 'bakiPerempuan';
+        u[medanS] = Math.max(0, u[medanS] - 1);
+        u[medanB] = u[medanB] + 1;
+        if (jantina === 'L') { u.bakiUntukSaya = u.bakiLelaki; } else { u.bakiUntukSaya = u.bakiPerempuan; }
+        u.jumlah = u.semasaLelaki + u.semasaPerempuan;
+      }
+    });
+    lukis();
+  }
+  muatData();
+}
+
+/* ============================================================
+   ADMIN — RINGKASAN
+   ============================================================ */
+function lukisRingkasan() {
+  const r = data.ringkasan || {};
+  const unit = (data.unit || []).sort((a, b) => b.jumlah - a.jumlah);
+
+  let h = '<div class="section-head"><h2 class="display">Ringkasan pemilihan</h2>' +
+    '<p>' + (r.belumDipilih || 0) + ' pelajar belum mendaftar mana-mana unit.</p></div>';
+
+  h += '<div class="stat-grid" style="margin-bottom:18px">' +
+    stat('Pelajar', r.jumlahPelajar || 0, (r.pelajarLelaki || 0) + 'L · ' + (r.pelajarPerempuan || 0) + 'P') +
+    stat('Terdaftar', r.terisi || 0, 'daripada ' + (r.kapasiti || 0) + ' tempat') +
+    stat('Belum', r.belumDipilih || 0, 'perlu tindakan') +
+    stat('Unit aktif', r.unitAktif || 0, 'daripada 6') +
+  '</div>';
+
+  h += '<div class="card card-pad">' +
+    '<h3 style="font-size:14px;font-weight:700;margin-bottom:14px">Kadar pengisian ikut unit</h3>';
+  unit.forEach(u => {
+    const peratus = u.kapasiti > 0 ? Math.round(u.jumlah / u.kapasiti * 100) : 0;
+    h += '<div style="padding:11px 0;border-bottom:1px solid var(--line-2)">' +
+      '<div class="row-between" style="margin-bottom:7px">' +
+        '<div class="row" style="gap:8px;min-width:0">' +
+          '<span style="width:8px;height:8px;border-radius:2px;background:' + esc(u.warna) + ';flex:none"></span>' +
+          '<span style="font-size:13px;font-weight:600" class="grow">' + esc(u.nama) + '</span>' +
+        '</div>' +
+        '<span class="mono tiny" style="font-weight:600;color:var(--ink-2)">' + u.jumlah + '/' + u.kapasiti + '</span>' +
+      '</div>' +
+      '<div class="bar" style="margin:0"><i style="width:' + Math.min(100, peratus) + '%;background:' + esc(u.warna) + '"></i></div>' +
+      '<div class="tiny muted" style="margin-top:5px">Lelaki ' + u.semasaLelaki + '/' + u.kuotaLelaki + ' · Perempuan ' + u.semasaPerempuan + '/' + u.kuotaPerempuan + '</div>' +
+    '</div>';
+  });
+  h += '</div>';
+
+  $('kandungan').innerHTML = h;
+}
+
+function stat(k, v, s) {
+  return '<div class="stat"><p class="k">' + esc(k) + '</p><p class="v mono">' + esc(v) + '</p>' +
+    (s ? '<p class="s">' + esc(s) + '</p>' : '') + '</div>';
+}
+
+/* ============================================================
+   ADMIN — SENARAI IKUT UNIT (cetak)
+   ============================================================ */
+let dataSenarai = null;
+let unitCetak = '';
+
+function lukisSenaraiUnit() {
+  const unit = (data.unit || []).filter(u => u.aktif);
+  if (!dataSenarai) { muatSenaraiUnit(); }
+
+  let h = '<div class="section-head">' +
+    '<div class="row-between" style="align-items:flex-start;gap:12px;flex-wrap:wrap">' +
+      '<div class="grow"><h2 class="display">Senarai ikut unit</h2>' +
+      '<p>Nama pelajar yang memilih setiap unit. Cetak atau muat turun CSV.</p></div>' +
+      '<div class="row" style="gap:7px;flex:none">' +
+        '<button class="btn btn-ghost btn-sm" id="btnJanaSheet">Jana helaian</button>' +
+        '<button class="btn btn-primary btn-sm" id="btnCetakSemua">Cetak semua</button>' +
+      '</div>' +
+    '</div></div>';
+
+  if (!dataSenarai) {
+    h += '<div class="card card-pad"><p class="tiny muted">Memuatkan senarai…</p></div>';
+    $('kandungan').innerHTML = h;
+    return;
+  }
+
+  const ikut = dataSenarai.ikutUnit || {};
+
+  // ringkasan setiap unit
+  h += '<div class="card card-pad" style="margin-bottom:14px">' +
+    '<div class="row-between" style="margin-bottom:10px">' +
+      '<p style="font-size:13.5px;font-weight:600">Pilih unit untuk dicetak</p>' +
+      '<p class="tiny muted">' + (dataSenarai.jumlah || 0) + ' pelajar berdaftar</p>' +
+    '</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px">';
+  unit.forEach(u => {
+    const n = (ikut[u.kod] || []).length;
+    const aktif = unitCetak === u.kod;
+    h += '<button class="btn btn-sm" data-unit-cetak="' + esc(u.kod) + '" style="justify-content:flex-start;border:1px solid ' +
+      (aktif ? u.warna : 'var(--line)') + ';background:' + (aktif ? u.warna + '12' : 'var(--card)') + ';color:var(--ink)">' +
+      '<span style="width:7px;height:7px;border-radius:2px;background:' + esc(u.warna) + ';flex:none"></span>' +
+      '<span style="flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis">' + esc(u.singkatan) + '</span>' +
+      '<span class="mono tiny" style="font-weight:700">' + n + '</span></button>';
+  });
+  h += '</div></div>';
+
+  // jadual penuh setiap unit
+  unit.forEach(u => {
+    if (unitCetak && unitCetak !== u.kod) return;
+    const senarai = ikut[u.kod] || [];
+    h += '<div class="card card-pad" style="margin-bottom:14px" data-blok-unit="' + esc(u.kod) + '">' +
+      '<div class="row-between" style="margin-bottom:11px;align-items:flex-start;gap:10px">' +
+        '<div class="grow">' +
+          '<div class="row" style="gap:8px;margin-bottom:2px">' +
+            '<span style="width:9px;height:9px;border-radius:2px;background:' + esc(u.warna) + ';flex:none"></span>' +
+            '<p class="display" style="font-size:17px">' + esc(u.nama) + '</p>' +
+          '</div>' +
+          '<p class="tiny muted">' + senarai.length + ' pelajar · Lelaki ' + u.semasaLelaki + '/' + u.kuotaLelaki +
+          ' · Perempuan ' + u.semasaPerempuan + '/' + u.kuotaPerempuan + '</p>' +
+        '</div>' +
+        '<button class="btn btn-ghost btn-sm" data-cetak-unit="' + esc(u.kod) + '">Cetak</button>' +
+      '</div>';
+
+    if (!senarai.length) {
+      h += '<p class="tiny muted" style="padding:14px 0;text-align:center">Tiada pelajar memilih unit ini.</p>';
+    } else {
+      h += '<div class="table-wrap"><table><thead><tr>' +
+        '<th class="num" style="width:38px">Bil.</th><th>Nama</th><th>No. KP</th><th>Kelas</th><th>Jantina</th><th class="num">Tindakan</th>' +
+        '</tr></thead><tbody>';
+      senarai.forEach((r, i) => {
+        h += '<tr>' +
+          '<td class="num tiny muted">' + (i + 1) + '</td>' +
+          '<td><span style="font-weight:600">' + esc(r.nama) + '</span>' +
+            '<span class="tiny muted" style="display:block">' + esc(r.angkaGiliran || '—') + '</span></td>' +
+          '<td class="mono tiny">' + esc(r.noKP) + '</td>' +
+          '<td>' + esc(r.kelas || '—') + '</td>' +
+          '<td>' + (r.jantina === 'L' ? 'L' : r.jantina === 'P' ? 'P' : '—') + '</td>' +
+          '<td class="num"><button class="btn btn-ghost btn-sm" data-pindah="' + esc(r.noKP) + '">Tukar</button></td>' +
+        '</tr>';
+      });
+      h += '</tbody></table></div>';
+    }
+    h += '</div>';
+  });
+
+  $('kandungan').innerHTML = h;
+
+  $('btnJanaSheet').onclick = janaSheetUnit;
+  $('btnCetakSemua').onclick = () => cetakSenaraiUnit('');
+  $('kandungan').querySelectorAll('[data-unit-cetak]').forEach(b => {
+    b.onclick = () => { unitCetak = (unitCetak === b.dataset.unitCetak ? '' : b.dataset.unitCetak); lukisSenaraiUnit(); };
+  });
+  $('kandungan').querySelectorAll('[data-cetak-unit]').forEach(b => {
+    b.onclick = () => cetakSenaraiUnit(b.dataset.cetakUnit);
+  });
+  $('kandungan').querySelectorAll('[data-pindah]').forEach(b => {
+    b.onclick = () => tukarUnitPelajar(b.dataset.pindah);
+  });
+}
+
+function muatSenaraiUnit() {
+  panggil({ action: 'senaraiUnit' }).then(r => {
+    if (!r || r.status !== 'ok') { toast((r && r.message) || 'Gagal memuat senarai.', 'error'); return; }
+    dataSenarai = r;
+    if (tabAktif === 'senarai') lukisSenaraiUnit();
+  }).catch(e => toast(e.message, 'error'));
+}
+
+async function janaSheetUnit() {
+  const ok = await modal({
+    tajuk: 'Jana helaian unit?',
+    isi: 'Satu helaian untuk setiap unit akan dicipta atau dikemas kini dalam Google Sheets (' +
+      '<b>Unit - PENGAKAP</b>, <b>Unit - BSMM</b>, dan seterusnya). Helaian diisi semula, bukan ditambah.',
+    butangUtama: 'Jana'
+  });
+  if (!ok) return;
+  const btn = $('btnJanaSheet');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Menjana'; }
+  try {
+    const r = await panggil({ action: 'janaSheetUnit' });
+    toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+  } catch (e) { toast(e.message, 'error'); }
+  finally { if (btn) { btn.disabled = false; btn.textContent = 'Jana helaian'; } }
+}
+
+/** Cetak senarai satu unit (kod) atau semua unit jika kod kosong. */
+function cetakSenaraiUnit(kod) {
+  if (!dataSenarai) { toast('Senarai belum dimuatkan.', 'warn'); return; }
+  const unit = (data.unit || []).filter(u => u.aktif && (!kod || u.kod === kod));
+  const ikut = dataSenarai.ikutUnit || {};
+  if (!unit.length) { toast('Tiada unit untuk dicetak.', 'warn'); return; }
+
+  const ukuran = 'border:1px solid #000;padding:3px 5px;';
+  let html = '<div style="font-family:Arial,sans-serif;color:#000;font-size:10px;padding:5mm">';
+
+  unit.forEach((u, idx) => {
+    const senarai = ikut[u.kod] || [];
+    if (idx > 0) html += '<div style="page-break-before:always"></div>';
+
+    html += '<div style="border:2px solid #000;padding:2mm 3mm;margin-bottom:3mm">' +
+      '<div style="font-weight:bold;font-size:10px">SENARAI PELAJAR UNIT BERUNIFORM</div>' +
+      '<div style="text-align:center;font-weight:bold;font-size:14px;margin-top:1mm">' + esc(u.nama.toUpperCase()) + '</div>' +
+      '<div style="text-align:center;font-size:9px">Institut Pendidikan Guru Kampus Darulaman</div>' +
+      '</div>';
+
+    html += '<table style="width:100%;border-collapse:collapse;font-size:9px;margin-bottom:2mm">' +
+      '<tr><td style="width:110px;font-weight:bold">KOD UNIT</td><td>: ' + esc(u.kod) + '</td>' +
+      '<td style="width:90px;font-weight:bold">BILANGAN</td><td>: ' + senarai.length + ' pelajar</td></tr>' +
+      '<tr><td style="font-weight:bold">LELAKI</td><td>: ' + u.semasaLelaki + ' / ' + u.kuotaLelaki + '</td>' +
+      '<td style="font-weight:bold">PEREMPUAN</td><td>: ' + u.semasaPerempuan + ' / ' + u.kuotaPerempuan + '</td></tr>' +
+      '<tr><td style="font-weight:bold">TARIKH CETAK</td><td colspan="3">: ' +
+        new Date().toLocaleDateString('ms-MY', { day: '2-digit', month: 'long', year: 'numeric' }) + '</td></tr>' +
+      '</table>';
+
+    html += '<table style="width:100%;border-collapse:collapse;font-size:9px">' +
+      '<thead><tr style="background:#e5e7eb;font-weight:bold;text-align:center">' +
+      '<th style="' + ukuran + 'width:24px">Bil.</th>' +
+      '<th style="' + ukuran + '">Nama Pelajar</th>' +
+      '<th style="' + ukuran + '">No. Kad Pengenalan</th>' +
+      '<th style="' + ukuran + '">Angka Giliran</th>' +
+      '<th style="' + ukuran + '">Kelas</th>' +
+      '<th style="' + ukuran + '">Kumpulan</th>' +
+      '<th style="' + ukuran + 'width:40px">Jantina</th>' +
+      '</tr></thead><tbody>';
+
+    if (!senarai.length) {
+      html += '<tr><td colspan="7" style="' + ukuran + 'text-align:center;padding:8mm">Tiada pelajar memilih unit ini.</td></tr>';
+    }
+    senarai.forEach((r, i) => {
+      html += '<tr>' +
+        '<td style="' + ukuran + 'text-align:center">' + (i + 1) + '</td>' +
+        '<td style="' + ukuran + '">' + esc(r.nama) + '</td>' +
+        '<td style="' + ukuran + 'text-align:center">' + esc(r.noKP) + '</td>' +
+        '<td style="' + ukuran + 'text-align:center">' + esc(r.angkaGiliran || '') + '</td>' +
+        '<td style="' + ukuran + 'text-align:center">' + esc(r.kelas || '') + '</td>' +
+        '<td style="' + ukuran + 'text-align:center">' + esc(r.kumpulan || '') + '</td>' +
+        '<td style="' + ukuran + 'text-align:center">' + esc(r.jantina || '') + '</td>' +
+        '</tr>';
+    });
+    html += '</tbody></table>';
+
+    html += '<div style="display:flex;gap:10mm;margin-top:8mm;font-size:9px">' +
+      '<div style="flex:1"><div style="font-weight:bold;border-bottom:1px solid #000;padding-bottom:1mm;margin-bottom:2mm">DISEDIAKAN OLEH PENYELARAS</div>' +
+      '<div>Tandatangan: ______________________</div><div style="margin-top:4mm">Nama: ______________________</div>' +
+      '<div style="margin-top:2mm">Tarikh: ______________________</div></div>' +
+      '<div style="flex:1"><div style="font-weight:bold;border-bottom:1px solid #000;padding-bottom:1mm;margin-bottom:2mm">DISAHKAN OLEH KETUA JABATAN</div>' +
+      '<div>Tandatangan: ______________________</div><div style="margin-top:4mm">Nama: ______________________</div>' +
+      '<div style="margin-top:2mm">Tarikh: ______________________</div></div>' +
+      '</div>';
+  });
+
+  html += '</div>';
+
+  let bekas = document.getElementById('cetakUnit');
+  if (!bekas) {
+    bekas = document.createElement('div');
+    bekas.id = 'cetakUnit';
+    document.body.appendChild(bekas);
+  }
+  bekas.innerHTML = html;
+  setTimeout(() => window.print(), 200);
+}
+
+/* ============================================================
+   ADMIN — UNIT & KUOTA
+   ============================================================ */
+function lukisUnit() {
+  const unit = data.unit || [];
+  let h = '<div class="section-head"><h2 class="display">Kuota unit</h2>' +
+    '<p>Tetapkan berapa tempat untuk lelaki dan perempuan. 0 bermakna tiada tempat.</p></div>';
+
+  h += '<div class="card card-pad">';
+  unit.forEach(u => {
+    h += '<div class="kuota-row">' +
+      '<div class="kuota-name">' +
+        '<span class="kuota-dot" style="background:' + esc(u.warna) + '"></span>' +
+        '<div class="grow"><p class="t">' + esc(u.nama) + '</p><p class="u">' + esc(u.kod) + '</p></div>' +
+      '</div>' +
+      '<label class="field"><span>Lelaki</span>' +
+        '<input class="input" type="number" min="0" step="1" inputmode="numeric" data-kuota-l="' + esc(u.kod) + '" value="' + u.kuotaLelaki + '"></label>' +
+      '<label class="field"><span>Perempuan</span>' +
+        '<input class="input" type="number" min="0" step="1" inputmode="numeric" data-kuota-p="' + esc(u.kod) + '" value="' + u.kuotaPerempuan + '"></label>' +
+      '<div><p class="tiny muted" style="margin-bottom:5px">Terisi</p>' +
+        '<p class="mono" style="font-size:13px;font-weight:700">' + u.semasaLelaki + 'L · ' + u.semasaPerempuan + 'P</p></div>' +
+    '</div>';
+  });
+  h += '<div class="row" style="margin-top:16px;gap:9px">' +
+    '<button class="btn btn-primary grow" id="btnSimpanKuota">Simpan kuota</button>' +
+  '</div></div>';
+
+  h += '<p class="tiny muted" style="margin-top:12px">Jumlah kapasiti semasa: <b class="mono">' +
+    unit.reduce((a, u) => a + u.kuotaLelaki + u.kuotaPerempuan, 0) + '</b> tempat.</p>';
+
+  $('kandungan').innerHTML = h;
+
+  $('btnSimpanKuota').onclick = async () => {
+    const senarai = (data.unit || []).map(u => ({
+      kod: u.kod,
+      kuotaLelaki: Number(document.querySelector('[data-kuota-l="' + u.kod + '"]').value) || 0,
+      kuotaPerempuan: Number(document.querySelector('[data-kuota-p="' + u.kod + '"]').value) || 0
+    }));
+    const btn = $('btnSimpanKuota');
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Menyimpan';
+    try {
+      const r = await panggil({ action: 'simpanKuota', unit: senarai });
+      toast((r && r.message) || 'Disimpan.', r && r.status === 'ok' ? 'ok' : 'error');
+      if (r && r.status === 'ok') muatData();
+    } catch (e) { toast(e.message, 'error'); }
+    finally { btn.disabled = false; btn.textContent = 'Simpan kuota'; }
+  };
+}
+
+/* ============================================================
+   ADMIN — PELAJAR
+   ============================================================ */
+let tapisPelajar = { cari: '', kelas: '', unit: '', status: '' };
+
+function lukisPelajarAdmin() {
+  const unit = data.unit || [];
+  const namaUnit = {};
+  unit.forEach(u => { namaUnit[u.kod] = u; });
+
+  let h = '<div class="section-head">' +
+    '<div class="row-between" style="align-items:flex-start;gap:12px;flex-wrap:wrap">' +
+      '<div class="grow"><h2 class="display">Senarai pelajar</h2>' +
+      '<p>' + (data.pelajar || []).length + ' pelajar · ' + (data.pemilihan || []).length + ' terdaftar</p></div>' +
+      '<div class="row" style="gap:7px;flex:none">' +
+        '<button class="btn btn-ghost btn-sm" id="btnTemplatPelajar">⬇ Templat</button>' +
+        '<button class="btn btn-primary btn-sm" id="btnKeImport">＋ Import</button>' +
+      '</div>' +
+    '</div></div>';
+
+  h += '<div class="card card-pad" style="margin-bottom:14px">' +
+    '<div class="stack" style="gap:9px">' +
+      '<input class="input" id="cariPel" placeholder="Cari nama, No. KP atau angka giliran" value="' + esc(tapisPelajar.cari) + '">' +
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">' +
+        '<select class="input" id="tapisKelas"><option value="">Semua kelas</option>' +
+          (data.kelas || []).map(k => '<option value="' + esc(k) + '"' + (tapisPelajar.kelas === k ? ' selected' : '') + '>' + esc(k) + '</option>').join('') +
+        '</select>' +
+        '<select class="input" id="tapisUnit"><option value="">Semua unit</option>' +
+          '<option value="__tiada" ' + (tapisPelajar.unit === '__tiada' ? 'selected' : '') + '>Belum daftar</option>' +
+          unit.map(u => '<option value="' + esc(u.kod) + '"' + (tapisPelajar.unit === u.kod ? ' selected' : '') + '>' + esc(u.nama) + '</option>').join('') +
+        '</select>' +
+      '</div>' +
+    '</div></div>';
+
+  const senarai = (data.pelajar || []).filter(p => {
+    const q = tapisPelajar.cari.toLowerCase();
+    if (q && !(p.nama + ' ' + p.noKP + ' ' + p.angkaGiliran).toLowerCase().includes(q)) return false;
+    if (tapisPelajar.kelas && p.kelas !== tapisPelajar.kelas) return false;
+    if (tapisPelajar.unit === '__tiada' && p.unitDipilih) return false;
+    if (tapisPelajar.unit && tapisPelajar.unit !== '__tiada' && p.unitDipilih !== tapisPelajar.unit) return false;
+    return true;
+  });
+
+  h += '<p class="tiny muted" style="margin-bottom:9px">' + senarai.length + ' daripada ' + (data.pelajar || []).length + ' dipaparkan</p>';
+
+  h += '<div class="table-wrap"><table><thead><tr>' +
+    '<th>Nama</th><th>No. KP</th><th>Kelas</th><th>Jantina</th><th>Unit</th><th class="num">Tindakan</th>' +
+    '</tr></thead><tbody>';
+
+  if (!senarai.length) {
+    const adaPelajar = (data.pelajar || []).length > 0;
+    h += '<tr><td colspan="6" style="text-align:center;padding:30px 20px">' +
+      (adaPelajar
+        ? '<p class="tiny muted">Tiada pelajar sepadan dengan tapisan.</p>'
+        : '<p style="font-size:13.5px;font-weight:600;margin-bottom:4px">Belum ada pelajar</p>' +
+          '<p class="tiny muted" style="margin-bottom:12px">Muat turun templat, isi dalam Excel, kemudian import semula.</p>' +
+          '<div class="row" style="justify-content:center;gap:8px">' +
+            '<button class="btn btn-ghost btn-sm" id="btnTemplatKosong">⬇ Templat CSV</button>' +
+            '<button class="btn btn-primary btn-sm" id="btnImportKosong">＋ Import pelajar</button>' +
+          '</div>') +
+      '</td></tr>';
+  }
+  senarai.slice(0, 300).forEach(p => {
+    const u = namaUnit[p.unitDipilih];
+    h += '<tr>' +
+      '<td><span style="font-weight:600">' + esc(p.nama) + '</span>' +
+        '<span class="tiny muted" style="display:block">' + esc(p.angkaGiliran || '—') + '</span></td>' +
+      '<td class="mono tiny">' + esc(p.noKP) + '</td>' +
+      '<td>' + esc(p.kelas || '—') + '</td>' +
+      '<td>' + (p.jantina === 'L' ? 'L' : p.jantina === 'P' ? 'P' : '—') + '</td>' +
+      '<td>' + (u
+        ? '<span class="pill" style="background:' + esc(u.warna) + '14;color:' + esc(u.warna) + ';border-color:' + esc(u.warna) + '33">' + esc(u.singkatan) + '</span>'
+        : '<span class="pill pill-mute">Belum</span>') + '</td>' +
+      '<td class="num" style="white-space:nowrap">' +
+        '<button class="btn btn-ghost btn-sm" data-pindah="' + esc(p.noKP) + '">Tukar</button> ' +
+        '<button class="btn btn-danger btn-sm" data-hapus="' + esc(p.noKP) + '">Padam</button>' +
+      '</td></tr>';
+  });
+  h += '</tbody></table></div>';
+  if (senarai.length > 300) h += '<p class="tiny muted" style="margin-top:9px">Menunjukkan 300 pertama. Guna carian untuk menapis.</p>';
+
+  $('kandungan').innerHTML = h;
+
+  $('btnTemplatPelajar').onclick = muatTurunTemplat;
+  $('btnKeImport').onclick = () => tukarTab('import');
+
+  let tunda = null;
+  $('cariPel').oninput = (e) => {
+    clearTimeout(tunda);
+    const v = e.target.value;
+    tunda = setTimeout(() => { tapisPelajar.cari = v; lukisPelajarAdmin(); }, 220);
+  };
+  $('tapisKelas').onchange = (e) => { tapisPelajar.kelas = e.target.value; lukisPelajarAdmin(); };
+  $('tapisUnit').onchange = (e) => { tapisPelajar.unit = e.target.value; lukisPelajarAdmin(); };
+
+  const bt = $('btnTemplatKosong');
+  if (bt) bt.onclick = muatTurunTemplat;
+  const bi = $('btnImportKosong');
+  if (bi) bi.onclick = () => tukarTab('import');
+
+  $('kandungan').querySelectorAll('[data-pindah]').forEach(b => {
+    b.onclick = () => tukarUnitPelajar(b.dataset.pindah);
+  });
+  $('kandungan').querySelectorAll('[data-hapus]').forEach(b => {
+    b.onclick = () => hapusPelajar(b.dataset.hapus);
+  });
+}
+
+async function tukarUnitPelajar(noKP) {
+  const p = (data.pelajar || []).find(x => x.noKP === noKP);
+  if (!p) return;
+  const unit = (data.unit || []).filter(u => u.aktif);
+  const pilihanHtml = '<div class="stack" style="gap:7px;margin-top:4px">' +
+    '<button class="btn btn-ghost" data-set="" style="justify-content:flex-start">Keluarkan dari unit</button>' +
+    unit.map(u => {
+      const kuota = p.jantina === 'L' ? u.kuotaLelaki : u.kuotaPerempuan;
+      const semasa = p.jantina === 'L' ? u.semasaLelaki : u.semasaPerempuan;
+      const penuh = kuota === 0 || semasa >= kuota;
+      return '<button class="btn btn-ghost" data-set="' + esc(u.kod) + '" style="justify-content:flex-start' + (penuh ? ';opacity:.5' : '') + '"' + (penuh ? ' disabled' : '') + '>' +
+        '<span style="width:7px;height:7px;border-radius:2px;background:' + esc(u.warna) + ';flex:none"></span>' +
+        '<span style="flex:1;text-align:left">' + esc(u.nama) + '</span>' +
+        '<span class="tiny mono muted">' + semasa + '/' + kuota + '</span></button>';
+    }).join('') + '</div>';
+
+  return new Promise(resolve => {
+    const akar = $('modalAkar');
+    akar.innerHTML = '<div class="modal"><div class="modal-veil" data-batal></div>' +
+      '<div class="modal-card" style="max-height:82vh;overflow:auto">' +
+        '<h3 class="display" style="font-size:18px;margin-bottom:3px">Tukar unit</h3>' +
+        '<p class="tiny muted" style="margin-bottom:14px">' + esc(p.nama) + ' · ' + (p.jantina === 'L' ? 'Lelaki' : 'Perempuan') + '</p>' +
+        pilihanHtml +
+        '<button class="btn btn-ghost btn-block" style="margin-top:12px" data-batal>Tutup</button>' +
+      '</div></div>';
+    const tutup = () => { akar.innerHTML = ''; resolve(); };
+    akar.querySelectorAll('[data-batal]').forEach(b => b.onclick = tutup);
+    akar.querySelectorAll('[data-set]').forEach(b => {
+      b.onclick = async () => {
+        tutup();
+        const kod = b.dataset.set;
+        const r = await panggil({ action: 'pindahPelajar', noKP: noKP, kodUnit: kod });
+        toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+        dataSenarai = null;
+        muatData();
+        if (tabAktif === 'senarai') muatSenaraiUnit();
+      };
+    });
+  });
+}
+
+async function hapusPelajar(noKP) {
+  const p = (data.pelajar || []).find(x => x.noKP === noKP);
+  if (!await modal({
+    tajuk: 'Padam pelajar?',
+    isi: '<b>' + esc(p ? p.nama : noKP) + '</b> akan dipadam bersama rekod pemilihannya. Tindakan ini tidak boleh dibatalkan.',
+    butangUtama: 'Padam', jenis: 'bahaya'
+  })) return;
+  const r = await panggil({ action: 'padamPelajar', noKP: noKP });
+  toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+  muatData();
+}
+
+/* ============================================================
+   ADMIN — IMPORT
+   ============================================================ */
+function lukisImport() {
+  let h = '<div class="section-head"><h2 class="display">Import pelajar</h2>' +
+    '<p>Muat naik fail CSV atau tampal dari Excel. Baris sedia ada dikemas kini, bukan berganda.</p></div>';
+
+  h += '<div class="card card-pad" style="margin-bottom:14px">' +
+    '<div class="row-between" style="margin-bottom:13px;align-items:flex-start;gap:12px">' +
+      '<div class="grow">' +
+        '<p style="font-size:14.5px;font-weight:600;margin-bottom:3px">1. Muat turun templat</p>' +
+        '<p class="tiny muted">Fail CSV dengan header dan dua baris contoh. Buka dalam Excel atau Google Sheets, isi, kemudian muat naik semula.</p>' +
+      '</div>' +
+      '<button class="btn btn-primary btn-sm" id="btnTemplat" style="flex:none">⬇ Templat CSV</button>' +
+    '</div>' +
+    '<div style="border:1px solid var(--line-2);border-radius:10px;overflow:hidden;margin-bottom:14px">' +
+      '<table style="min-width:0;font-size:11.5px"><thead><tr>' +
+        '<th style="padding:7px 10px">Lajur</th><th style="padding:7px 10px">Wajib</th><th style="padding:7px 10px">Contoh / nota</th>' +
+      '</tr></thead><tbody>' +
+        barisLajur('nama', 'Ya', 'Nama penuh pelajar') +
+        barisLajur('noKP', 'Ya', '060706142030 — kunci log masuk pelajar, sengkang dibuang automatik') +
+        barisLajur('angkaGiliran', 'Tidak', 'MPU0001') +
+        barisLajur('kelas', 'Tidak', 'BAM1 — digunakan untuk tapisan') +
+        barisLajur('kumpulan', 'Tidak', 'A / B') +
+        barisLajur('ambilan', 'Tidak', '2026') +
+        barisLajur('jantina', 'Ya', 'L atau P (LELAKI / PEREMPUAN juga diterima)') +
+      '</tbody></table>' +
+    '</div>' +
+    '<div class="row-between" style="gap:9px;flex-wrap:wrap">' +
+      '<p class="tiny muted" style="flex:1;min-width:180px">Perlu senarai sedia ada sebagai rujukan? Muat turun data semasa.</p>' +
+      '<button class="btn btn-ghost btn-sm" id="btnEksportPelajar">⬇ Eksport ' + (data.pelajar || []).length + ' pelajar</button>' +
+    '</div>' +
+    '</div>' +
+
+    '<div class="card card-pad" style="margin-bottom:14px">' +
+    '<p style="font-size:14.5px;font-weight:600;margin-bottom:3px">2. Muat naik fail</p>' +
+    '<p class="tiny muted" style="margin-bottom:12px">Baris dengan No. KP yang sama akan dikemas kini, bukan berganda.</p>' +
+    '<div class="drop" id="dropZone">' +
+      '<p style="font-size:13.5px;font-weight:600;margin-bottom:4px">Seret fail ke sini</p>' +
+      '<p class="tiny muted" style="margin-bottom:11px">CSV, TSV atau TXT · maks 5 MB</p>' +
+      '<button class="btn btn-primary btn-sm" id="btnPilihFail">Pilih fail</button>' +
+      '<input type="file" id="failPelajar" accept=".csv,.tsv,.txt,text/csv,text/plain" class="hidden">' +
+      '<p class="tiny" id="statusImport" style="margin-top:10px"></p>' +
+    '</div>' +
+    '<div id="pratontonImport" class="hidden" style="margin-top:14px"></div>' +
+  '</div>';
+
+  h += '<div class="card card-pad">' +
+    '<p style="font-size:13.5px;font-weight:600;margin-bottom:9px">Atau tampal dari Excel</p>' +
+    '<textarea class="input" id="tampalImport" rows="6" style="min-height:120px;padding:11px 13px;font-family:ui-monospace,monospace;font-size:12px;resize:vertical" ' +
+      'placeholder="AIN ZULFA\t060706142030\tMPU0001\tBAM1\tA\t2026\tP"></textarea>' +
+    '<button class="btn btn-ghost btn-block" style="margin-top:9px" id="btnImportTeks">Import dari teks</button>' +
+  '</div>';
+
+  h += '<div class="card card-pad" style="margin-top:14px">' +
+    '<p style="font-size:13.5px;font-weight:600;margin-bottom:4px;color:var(--red)">Zon bahaya</p>' +
+    '<p class="tiny muted" style="margin-bottom:11px">Padam semua pelajar dan semua pemilihan. Kuota unit dikekalkan.</p>' +
+    '<button class="btn btn-danger btn-sm" id="btnPadamSemua">Padam semua pelajar</button>' +
+  '</div>';
+
+  $('kandungan').innerHTML = h;
+
+  $('btnTemplat').onclick = muatTurunTemplat;
+  $('btnEksportPelajar').onclick = eksportPelajar;
+  $('btnPilihFail').onclick = () => $('failPelajar').click();
+  $('failPelajar').onchange = (e) => { if (e.target.files[0]) bacaFail(e.target.files[0]); e.target.value = ''; };
+  $('btnImportTeks').onclick = importDariTeks;
+  $('btnPadamSemua').onclick = padamSemuaPelajar;
+
+  const dz = $('dropZone');
+  dz.ondragover = (e) => { e.preventDefault(); dz.classList.add('is-over'); };
+  dz.ondragleave = () => dz.classList.remove('is-over');
+  dz.ondrop = (e) => {
+    e.preventDefault(); dz.classList.remove('is-over');
+    if (e.dataTransfer.files[0]) bacaFail(e.dataTransfer.files[0]);
+  };
+}
+
+function barisLajur(lajur, wajib, nota) {
+  const warna = wajib === 'Ya' ? 'var(--green)' : 'var(--ink-4)';
+  return '<tr><td style="padding:7px 10px;font-family:ui-monospace,monospace;font-weight:600">' + esc(lajur) + '</td>' +
+    '<td style="padding:7px 10px;color:' + warna + ';font-weight:600;white-space:nowrap">' + esc(wajib) + '</td>' +
+    '<td style="padding:7px 10px;color:var(--ink-3)">' + esc(nota) + '</td></tr>';
+}
+
+const TEMPLAT_HEADER = ['nama', 'noKP', 'angkaGiliran', 'kelas', 'kumpulan', 'ambilan', 'jantina'];
+const TEMPLAT_CONTOH = [
+  ['AIN ZULFA BINTI MOHD DZAFER', '060706142030', 'MPU0001', 'BAM1', 'A', '2026', 'P'],
+  ['AHMAD ZULKIFLI BIN OMAR',     '060706142031', 'MPU0002', 'BAM1', 'A', '2026', 'L'],
+  ['NUR AISYAH BINTI ISMAIL',     '060706142032', 'MPU0003', 'BAM2', 'B', '2026', 'P']
+];
+
+function muatTurunCSV(namaFail, baris) {
+  const csv = '\uFEFF' + baris.map(r =>
+    r.map(c => '"' + String(c === null || c === undefined ? '' : c).replace(/"/g, '""') + '"').join(',')
+  ).join('\r\n') + '\r\n';
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = namaFail;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+function muatTurunTemplat() {
+  muatTurunCSV('templat-pelajar-unit-beruniform.csv', [TEMPLAT_HEADER].concat(TEMPLAT_CONTOH));
+  toast('Templat dimuat turun. Buka dengan Excel atau Google Sheets.', 'ok');
+}
+
+/** Eksport senarai pelajar semasa dalam format templat yang sama (boleh diedit & diimport semula). */
+function eksportPelajar() {
+  const senarai = data.pelajar || [];
+  if (!senarai.length) { toast('Tiada pelajar untuk dieksport.', 'warn'); return; }
+  const baris = [TEMPLAT_HEADER].concat(senarai.map(p => [
+    p.nama, p.noKP, p.angkaGiliran, p.kelas, p.kumpulan, p.ambilan, p.jantina
+  ]));
+  muatTurunCSV('senarai-pelajar-' + new Date().toISOString().slice(0, 10) + '.csv', baris);
+  toast(senarai.length + ' pelajar dieksport.', 'ok');
+}
+
+/* --- pembaca CSV/TSV --- */
+function pecahBaris(baris) {
+  const out = [];
+  let medan = '', dalamPetikan = false;
+  for (let i = 0; i < baris.length; i++) {
+    const c = baris[i];
+    if (dalamPetikan) {
+      if (c === '"') {
+        if (baris[i + 1] === '"') { medan += '"'; i++; }
+        else dalamPetikan = false;
+      } else medan += c;
+    } else if (c === '"') dalamPetikan = true;
+    else if (c === ',' || c === ';' || c === '\t') { out.push(medan); medan = ''; }
+    else medan += c;
+  }
+  out.push(medan);
+  return out.map(s => s.trim());
+}
+
+const TOKEN_HEADER = ['nama','namapenuh','nokp','kadpengenalan','kp','angkagiliran','angkagil','kelas','kumpulan','kelompok','ambilan','sesi','jantina','gender'];
+
+function bacaRekod(teks) {
+  const bersih = String(teks || '').replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+  let baris = bersih.split('\n').map(s => s.replace(/\s+$/, '')).filter(s => s.trim() !== '');
+  if (!baris.length) return { rekod: [], ralat: ['Fail kosong.'] };
+
+  let ix = { nama: 0, noKP: 1, angkaGiliran: 2, kelas: 3, kumpulan: 4, ambilan: 5, jantina: 6 };
+  const kepala = pecahBaris(baris[0]).map(s => s.toLowerCase().replace(/[^a-z0-9]/g, ''));
+  const padanan = kepala.filter(k => TOKEN_HEADER.indexOf(k) !== -1).length;
+  if (padanan >= 2) {
+    const cari = (...calon) => {
+      for (let i = 0; i < kepala.length; i++) {
+        if (calon.some(c => kepala[i] === c || kepala[i].indexOf(c) !== -1)) return i;
+      }
+      return -1;
+    };
+    ix = {
+      nama: cari('namapenuh', 'nama'),
+      noKP: cari('nokp', 'kadpengenalan', 'kp'),
+      angkaGiliran: cari('angkagiliran', 'angkagil', 'giliran'),
+      kelas: cari('kelas'),
+      kumpulan: cari('kumpulan', 'kelompok'),
+      ambilan: cari('ambilan', 'sesi', 'tahun'),
+      jantina: cari('jantina', 'gender')
+    };
+    if (ix.nama === -1) ix.nama = 0;
+    if (ix.noKP === -1) ix.noKP = 1;
+    baris.shift();
+  }
+
+  const rekod = [], ralat = [];
+  baris.forEach((b, i) => {
+    const sel = pecahBaris(b);
+    const ambil = (k) => (ix[k] >= 0 && sel[ix[k]] !== undefined ? String(sel[ix[k]]).trim() : '');
+    const nama = ambil('nama');
+    const noKP = ambil('noKP').replace(/[^0-9A-Za-z]/g, '');
+    const jRaw = ambil('jantina').toUpperCase();
+    const jantina = jRaw.charAt(0) === 'P' || jRaw.indexOf('PEREMPUAN') === 0 || jRaw === 'F' ? 'P'
+      : jRaw.charAt(0) === 'L' || jRaw.indexOf('LELAKI') === 0 || jRaw === 'M' ? 'L' : '';
+    if (!nama && !noKP) return;
+    if (!nama) { ralat.push('Baris ' + (i + 1) + ': nama kosong'); return; }
+    if (!noKP) { ralat.push('Baris ' + (i + 1) + ': No. KP kosong'); return; }
+    if (!jantina) { ralat.push('Baris ' + (i + 1) + ': jantina "' + ambil('jantina') + '" tidak sah (L/P)'); return; }
+    rekod.push([nama, noKP, ambil('angkaGiliran'), ambil('kelas'), ambil('kumpulan'), ambil('ambilan'), jantina]);
+  });
+  return { rekod, ralat };
+}
+
+let importSedia = null;
+
+function bacaFail(fail) {
+  const status = $('statusImport');
+  const kotak = $('pratontonImport');
+  const nama = String(fail.name || '');
+  if (!/\.(csv|tsv|txt)$/i.test(nama)) {
+    status.innerHTML = '<span style="color:var(--red);font-weight:600">Fail mesti .csv, .tsv atau .txt — bukan ' + esc(nama) + '</span>';
+    return;
+  }
+  if (fail.size > 5 * 1024 * 1024) {
+    status.innerHTML = '<span style="color:var(--red);font-weight:600">Fail terlalu besar (maks 5 MB).</span>';
+    return;
+  }
+  status.textContent = 'Membaca ' + nama + '…';
+  const pembaca = new FileReader();
+  pembaca.onload = () => {
+    const hasil = bacaRekod(pembaca.result);
+    importSedia = hasil.rekod;
+    if (!hasil.rekod.length) {
+      status.innerHTML = '<span style="color:var(--red);font-weight:600">Tiada baris sah. ' + esc(hasil.ralat[0] || '') + '</span>';
+      kotak.classList.add('hidden');
+      return;
+    }
+    status.innerHTML = '<span style="color:var(--green);font-weight:600">' + hasil.rekod.length + ' baris dibaca</span>' +
+      (hasil.ralat.length ? ' · <span style="color:var(--amber)">' + hasil.ralat.length + ' bermasalah</span>' : '');
+    kotak.classList.remove('hidden');
+    kotak.innerHTML =
+      '<div style="border:1px solid var(--line-2);border-radius:11px;overflow:hidden">' +
+        '<div class="row-between" style="background:var(--paper-2);padding:8px 11px">' +
+          '<p class="tiny" style="font-weight:700">Pratonton ' + Math.min(5, hasil.rekod.length) + ' / ' + hasil.rekod.length + ' baris</p>' +
+          '<button class="tiny" style="font-weight:700;text-decoration:underline;color:var(--ink-3)" id="btnBatalImport">Batal</button>' +
+        '</div>' +
+        '<div style="overflow:auto"><table style="min-width:520px;font-size:11px"><thead><tr>' +
+          '<th>Nama</th><th>No. KP</th><th>Kelas</th><th>Kump.</th><th>Ambilan</th><th>J</th>' +
+        '</tr></thead><tbody>' +
+          hasil.rekod.slice(0, 5).map(r =>
+            '<tr><td style="font-weight:600">' + esc(r[0]) + '</td><td class="mono">' + esc(r[1]) + '</td>' +
+            '<td>' + esc(r[3] || '—') + '</td><td>' + esc(r[4] || '—') + '</td><td>' + esc(r[5] || '—') + '</td>' +
+            '<td>' + esc(r[6]) + '</td></tr>').join('') +
+        '</tbody></table></div>' +
+        (hasil.ralat.length
+          ? '<div style="background:var(--amber-soft);padding:8px 11px">' +
+            hasil.ralat.slice(0, 4).map(x => '<p class="tiny" style="color:var(--amber)">' + esc(x) + '</p>').join('') + '</div>'
+          : '') +
+        '<div style="padding:10px"><button class="btn btn-primary btn-block" id="btnSahImport">Import ' + hasil.rekod.length + ' pelajar</button></div>' +
+      '</div>';
+    $('btnBatalImport').onclick = () => { importSedia = null; kotak.classList.add('hidden'); status.textContent = ''; };
+    $('btnSahImport').onclick = () => hantarImport(hasil.rekod.length);
+  };
+  pembaca.onerror = () => { status.innerHTML = '<span style="color:var(--red)">Gagal membaca fail.</span>'; };
+  pembaca.readAsText(fail, 'UTF-8');
+}
+
+async function hantarImport(jumlah) {
+  if (!importSedia || !importSedia.length) { toast('Tiada fail untuk diimport.', 'warn'); return; }
+  const btn = $('btnSahImport');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Mengimport'; }
+  const SAIZ = 200;
+  let berjaya = 0;
+  const ralat = [];
+  for (let i = 0; i < importSedia.length; i += SAIZ) {
+    const kelompok = importSedia.slice(i, i + SAIZ);
+    try {
+      const r = await panggil({ action: 'importPelajar', baris: kelompok });
+      if (r && r.status === 'ok') {
+        berjaya += (r.baharu || 0) + (r.dikemas || 0);
+        if (r.ralat && r.ralat.length) ralat.push.apply(ralat, r.ralat);
+      } else {
+        ralat.push((r && r.message) || 'Kelompok gagal');
+      }
+    } catch (e) { ralat.push(e.message); }
+    if (btn) btn.innerHTML = '<span class="spin"></span>' + berjaya + '/' + importSedia.length;
+  }
+  toast(berjaya + ' pelajar diimport' + (ralat.length ? ' · ' + ralat.length + ' isu' : '') + '.', ralat.length ? 'warn' : 'ok');
+  importSedia = null;
+  muatData();
+}
+
+async function importDariTeks() {
+  const teks = $('tampalImport').value || '';
+  const hasil = bacaRekod(teks);
+  if (!hasil.rekod.length) { toast('Tiada baris sah. ' + (hasil.ralat[0] || ''), 'warn'); return; }
+  const btn = $('btnImportTeks');
+  btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Mengimport';
+  try {
+    const r = await panggil({ action: 'importPelajar', baris: hasil.rekod });
+    toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+    if (r && r.status === 'ok') { $('tampalImport').value = ''; muatData(); }
+  } catch (e) { toast(e.message, 'error'); }
+  finally { btn.disabled = false; btn.textContent = 'Import dari teks'; }
+}
+
+async function padamSemuaPelajar() {
+  const n = (data.pelajar || []).length;
+  if (!n) { toast('Tiada pelajar untuk dipadam.', 'warn'); return; }
+  const sah = await modalPrompt({
+    tajuk: 'Padam semua pelajar?',
+    isi: 'AMARAN: ' + n + ' pelajar dan semua rekod pemilihan akan dipadam. Kuota unit dikekalkan. Taip <b>HAPUS SEMUA</b> untuk mengesahkan.',
+    label: 'Taip HAPUS SEMUA',
+    butangUtama: 'Padam semua'
+  });
+  if (sah === null) return;
+  const r = await panggil({ action: 'padamSemuaPelajar', sah: sah });
+  toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+  if (r && r.status === 'ok') muatData();
+}
+
+/* ============================================================
+   ADMIN — AKAUN
+   ============================================================ */
+function lukisAkaun() {
+  let h = '<div class="section-head"><h2 class="display">Akaun penyelaras</h2>' +
+    '<p>Tukar kata laluan anda. Tambah penyelaras lain jika perlu.</p></div>';
+
+  h += '<div class="card card-pad" style="margin-bottom:14px">' +
+    '<h3 style="font-size:13.5px;font-weight:600;margin-bottom:12px">Tukar kata laluan</h3>' +
+    '<div class="stack" style="gap:10px">' +
+      '<label class="field"><span>Kata laluan semasa</span><input class="input" type="password" id="kpLama" autocomplete="current-password"></label>' +
+      '<label class="field"><span>Kata laluan baharu</span><input class="input" type="password" id="kpBaru" autocomplete="new-password" placeholder="sekurang-kurangnya 6 aksara"></label>' +
+      '<button class="btn btn-primary btn-block" id="btnTukarKP">Simpan kata laluan</button>' +
+    '</div></div>';
+
+  h += '<div class="card card-pad">' +
+    '<h3 style="font-size:13.5px;font-weight:600;margin-bottom:4px">Tambah / kemas kini penyelaras</h3>' +
+    '<p class="tiny muted" style="margin-bottom:12px">Kemas kini emel sedia ada untuk menukar nama atau kata laluannya.</p>' +
+    '<div class="stack" style="gap:10px">' +
+      '<label class="field"><span>Emel</span><input class="input" type="email" id="adEmel" placeholder="nama@ipg.edu.my"></label>' +
+      '<label class="field"><span>Nama</span><input class="input" id="adNama" placeholder="Nama penuh"></label>' +
+      '<label class="field"><span>Kata laluan</span><input class="input" type="password" id="adPass" placeholder="Kosongkan untuk kekalkan"></label>' +
+      '<button class="btn btn-primary btn-block" id="btnSimpanAdmin">Simpan akaun</button>' +
+    '</div></div>';
+
+  h += '<div class="card card-pad" style="margin-top:14px">' +
+    '<h3 style="font-size:13.5px;font-weight:600;margin-bottom:4px">Penyelenggaraan data</h3>' +
+    '<p class="tiny muted" style="margin-bottom:11px">Buang baris pendua dalam helaian Pemilihan jika ada pelajar yang terdaftar lebih daripada satu unit.</p>' +
+    '<button class="btn btn-ghost btn-sm" id="btnKemasPendua">Kemas pendua</button>' +
+    '<p class="tiny" id="statusPendua" style="margin-top:9px"></p>' +
+    '</div>';
+
+  h += '<p class="tiny muted" style="margin-top:14px;text-align:center">Versi ' + esc(data.versi || VERSI) + (MOD_DEMO ? ' · mod demo' : '') + '</p>';
+
+  $('kandungan').innerHTML = h;
+
+  $('btnTukarKP').onclick = async () => {
+    const lama = $('kpLama').value, baru = $('kpBaru').value;
+    if (!lama || !baru) { toast('Isi kedua-dua medan.', 'warn'); return; }
+    const btn = $('btnTukarKP');
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Menyimpan';
+    try {
+      const r = await panggil({ action: 'tukarKataLaluan', lama, baharu: baru });
+      toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+      if (r && r.status === 'ok') { $('kpLama').value = ''; $('kpBaru').value = ''; }
+    } catch (e) { toast(e.message, 'error'); }
+    finally { btn.disabled = false; btn.textContent = 'Simpan kata laluan'; }
+  };
+
+  $('btnKemasPendua').onclick = async () => {
+    const btn = $('btnKemasPendua');
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Memeriksa';
+    try {
+      const r = await panggil({ action: 'kemasPendua' });
+      toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+      const st = $('statusPendua');
+      if (st && r) st.textContent = r.message || '';
+      if (r && r.status === 'ok') { dataSenarai = null; muatData(); }
+    } catch (e) { toast(e.message, 'error'); }
+    finally { btn.disabled = false; btn.textContent = 'Kemas pendua'; }
+  };
+
+  $('btnSimpanAdmin').onclick = async () => {
+    const email = $('adEmel').value.trim(), nama = $('adNama').value.trim(), password = $('adPass').value;
+    if (!email || !nama) { toast('Emel dan nama diperlukan.', 'warn'); return; }
+    const btn = $('btnSimpanAdmin');
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span>Menyimpan';
+    try {
+      const r = await panggil({ action: 'simpanAdmin', email, nama, password });
+      toast((r && r.message) || 'Selesai.', r && r.status === 'ok' ? 'ok' : 'error');
+      if (r && r.status === 'ok') { $('adEmel').value = ''; $('adNama').value = ''; $('adPass').value = ''; }
+    } catch (e) { toast(e.message, 'error'); }
+    finally { btn.disabled = false; btn.textContent = 'Simpan akaun'; }
+  };
+}
+
+/* ============================================================
+   MULAKAN
+   ============================================================ */
+(function mula() {
+  console.info('Pemilihan Unit Beruniform', VERSI, MOD_DEMO ? '(demo)' : '');
+  if (MOD_DEMO) demoMuat();
+  const s = bacaSesi();
+  if (s && s.token) {
+    sesi = s;
+    panggil({ action: s.peranan === 'admin' ? 'getDataAdmin' : 'getDataPelajar' })
+      .then(r => {
+        if (r && r.status === 'ok') { bukaApp(); }
+        else { padamSesi(); }
+      })
+      .catch(() => padamSesi());
+  }
+})();
+</script>
+</body>
+</html>
 
